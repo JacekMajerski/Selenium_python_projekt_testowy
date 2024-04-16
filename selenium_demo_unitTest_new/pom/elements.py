@@ -29,5 +29,10 @@ class LoginPageElements(object):
     user_password_fail ="Listopad"
     notify_incorrect_login = "ERROR: Too many failed login attempts. Please try again"
     notify_reset_email = "Password reset email has been sent."
+class MainPageElements(object):
     url_main_page = "http://seleniumdemo.com/"
     url_shop_page = "http://seleniumdemo.com/?post_type=product"
+    url_cart_page = "http://seleniumdemo.com/?page_id=5"
+    describe_search = "Search"
+    search_java = "java"
+    search_result = "Java Selenium WebDriver"

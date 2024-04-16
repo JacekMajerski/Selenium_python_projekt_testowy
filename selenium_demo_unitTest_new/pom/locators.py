@@ -21,8 +21,16 @@ class LoginPageLocators(object):
     logout_my_account = (By.CSS_SELECTOR, ".woocommerce-MyAccount-navigation-link--customer-logout > a")
     not_reset_email = (By.CSS_SELECTOR, ".woocommerce-message")
     breadcrumbs_my_account = (By.CSS_SELECTOR, "[rel='home']")
-    go_to_shop = (By.XPATH, "//ul[@id='topbar-menu']/li[@class='menu-item menu-item-type-post_type menu-item-object-page menu-item-21']//span[@class='nav__title']")
 
+class MainPageLocators(object):
+
+    go_to_shop = (By.XPATH, "//ul[@id='topbar-menu']/li[@class='menu-item menu-item-type-post_type menu-item-object-page menu-item-21']//span[@class='nav__title']")
+    go_to_cart_main_menu = (By.XPATH, "//ul[@id='topbar-menu']/li[@class='menu-item menu-item-type-post_type menu-item-object-page menu-item-20']//span[@class='nav__title']")
+    go_to_cart_icon = (By.CSS_SELECTOR, "[data-toggle='czr-dropdown'] > .icn-shoppingcart")
+    go_to_search = (By.CSS_SELECTOR, ".regular-nav.utils .search-toggle_btn")
+    search_describe = (By.XPATH, "//div[@class='search__wrapper']//div[@class='form-group czr-focus']")
+    search_field = (By.XPATH, "//div[@class='search__wrapper']//input[@name='s']")
+    search_results = (By.CSS_SELECTOR, ".czr-title")
 
 class SearchResultsPageLocators(object):
     """A class for search results locators. All search results locators should

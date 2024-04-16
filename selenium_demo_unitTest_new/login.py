@@ -2,9 +2,9 @@ import unittest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 
-from pom.page import LoginPage
-from pom.elements import LoginPageElements
-from pom.locators import LoginPageLocators
+from pom.page import LoginPage, MainPage
+from pom.elements import LoginPageElements, MainPageElements
+from pom.locators import LoginPageLocators, MainPageLocators
 from pom.actions import LoginPageActions
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -17,8 +17,10 @@ class TestLoginPage(unittest.TestCase):
 
     def setUp(self):
         self.driver = webdriver.Chrome()
+        self.driver.set_window_size(1920, 1080)
         self.driver.get("http://seleniumdemo.com/?page_id=7")
         self.login_page = LoginPage(self.driver)
+        self.main_page = MainPage(self.driver)
 
     def test_successful_login(self):
         """Test successful login"""
@@ -62,27 +64,70 @@ class TestLoginPage(unittest.TestCase):
     def test_breadcrumbs_from_my_account_to_main_page(self):
         self.login_page.click_breadcrumbs_to_main_page()
         print(self.driver.current_url)
-        if (self.driver.current_url == LoginPageElements.url_main_page):
+        if (self.driver.current_url == MainPageElements.url_main_page):
             print('Adres Url jest zgodny z oczekiwanym')
         else:
             print('Adres Url jest niezgodny z oczekiwanym')
-        self.assertEqual(self.driver.current_url, LoginPageElements.url_main_page)
+        self.assertEqual(self.driver.current_url, MainPageElements.url_main_page)
 
     def test_go_to_shop(self):
-        self.login_page.click_go_to_shop()
+        a = ActionChains(self.driver)
+        m = self.driver.find_element(*MainPageLocators.go_to_shop)
+        a.move_to_element(m).perform()
+        self.main_page.click_go_to_shop()
         print(self.driver.current_url)
-        if (self.driver.current_url == LoginPageElements.url_shop_page):
+        if (self.driver.current_url == MainPageElements.url_shop_page):
             print('Adres Url jest zgodny z oczekiwanym')
         else:
             print('Adres Url jest niezgodny z oczekiwanym')
-        self.assertEqual(self.driver.current_url, LoginPageElements.url_shop_page)
+        self.assertEqual(self.driver.current_url, MainPageElements.url_shop_page)
 
-    def test_go_to_shop2(self):
-        a = ActionChains
-        m = self.driver.find_element(*LoginPageLocators.go_to_shop)
-        a.move_to_element(m).perform()
-
+    def test_go_to_cart_main_menu(self):
+        self.main_page.click_go_to_cart_main_menu()
         print(self.driver.current_url)
+        if (self.driver.current_url == MainPageElements.url_cart_page):
+            print('Adres Url jest zgodny z oczekiwanym')
+        else:
+            print('Adres Url jest niezgodny z oczekiwanym')
+        self.assertEqual(self.driver.current_url, MainPageElements.url_cart_page)
+
+    def test_go_to_cart_icon(self):
+        a = ActionChains(self.driver)
+        m = self.driver.find_element(*MainPageLocators.go_to_cart_icon)
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(MainPageLocators.go_to_cart_icon))
+        a.move_to_element(m).perform()
+        self.main_page.click_go_to_cart_icon()
+        print(self.driver.current_url)
+        if (self.driver.current_url == MainPageElements.url_cart_page):
+            print('Adres Url jest zgodny z oczekiwanym')
+        else:
+            print('Adres Url jest niezgodny z oczekiwanym')
+        self.assertEqual(self.driver.current_url, MainPageElements.url_cart_page)
+
+    def test_search_engine(self):
+        self.main_page.click_search_engine()
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(MainPageLocators.search_describe))
+        inscription = self.driver.find_element(*MainPageLocators.search_describe).text
+        print(inscription)
+        if (inscription == MainPageElements.describe_search):
+            print('Napis na wyszukiwarce jest zgodny z oczekiwanym')
+        else:
+            print('Napis na wyszukiwarce jest niezgodny z oczekiwanym, lub strona wczytała się niepoprawnie')
+        self.assertEqual(inscription, MainPageElements.describe_search)
+
+    def test_search_engine_search_java(self):
+        self.main_page.click_search_engine()
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(MainPageLocators.search_describe))
+        self.main_page.click_search_field()
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(MainPageLocators.search_field))
+        self.main_page.set_search(MainPageElements.search_java)
+        result = self.driver.find_element(*MainPageLocators.search_results).text
+        print(result)
+        if (result == MainPageElements.search_result):
+            print('Wyszukany element jest zgodny z oczekiwanym')
+        else:
+            print('Wyszukany element jest niezgodny z oczekiwanym')
+        self.assertEqual(result, MainPageElements.search_result)
 
     def tearDown(self):
         self.driver.quit()

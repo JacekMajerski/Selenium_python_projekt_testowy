@@ -1,5 +1,7 @@
 from .elements import LoginPageElements
+from .elements import MainPageElements
 from .locators import LoginPageLocators
+from .locators import MainPageLocators
 from .page import BasePage
 
 

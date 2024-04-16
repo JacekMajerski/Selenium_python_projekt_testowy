@@ -1,7 +1,9 @@
 from .elements import BasePageElement
 from .locators import LoginPageLocators
+from .locators import MainPageLocators
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.keys import Keys
 
 
 class SearchTextElement(BasePageElement):
@@ -18,14 +20,36 @@ class MainPage(BasePage):
     """Home page action methods come here. I.e. Python.org"""
     search_text_element = SearchTextElement()
 
-    def is_title_matches(self):
-        """Verifies that the hardcoded text "Python" appears in page title"""
-        return "Python" in self.driver.title
+    def click_go_to_shop(self):
+        go_shop = self.driver.find_element(*MainPageLocators.go_to_shop)
+        go_shop.click()
 
-    def click_go_button(self):
-        """Triggers the search"""
-        element = self.driver.find_element(*LoginPageLocators.GO_BUTTON)
-        element.click()
+
+    def click_go_to_cart_main_menu(self):
+        go_cart = self.driver.find_element(*MainPageLocators.go_to_cart_main_menu)
+        go_cart.click()
+
+
+    def click_go_to_cart_icon(self):
+        go_cart_icon = self.driver.find_element(*MainPageLocators.go_to_cart_icon)
+        go_cart_icon.click()
+
+
+    def click_search_engine(self):
+        search_engine = self.driver.find_element(*MainPageLocators.go_to_search)
+        search_engine.click()
+
+
+    def click_search_field(self):
+        search_field = self.driver.find_element(*MainPageLocators.search_describe)
+        search_field.click()
+
+
+    def set_search(self, search_query):
+        set_query = self.driver.find_element(*MainPageLocators.search_field)
+        set_query.clear()
+        set_query.send_keys(search_query)
+        set_query.send_keys(Keys.RETURN)
 
 class LoginPage(BasePage):  # Dodano dziedziczenie po BasePage
     username_textbox = (By.ID, 'username')
@@ -97,9 +121,6 @@ class LoginPage(BasePage):  # Dodano dziedziczenie po BasePage
         bread_main_page = self.driver.find_element(*LoginPageLocators.breadcrumbs_my_account)
         bread_main_page.click()
 
-    def click_go_to_shop(self):
-        go_shop = self.driver.find_element(*LoginPageLocators.go_to_shop)
-        go_shop.click()
 
 class SearchResultsPage(BasePage):
     """Search results page action methods come here"""
