@@ -31,6 +31,13 @@ class MainPageLocators(object):
     search_describe = (By.XPATH, "//div[@class='search__wrapper']//div[@class='form-group czr-focus']")
     search_field = (By.XPATH, "//div[@class='search__wrapper']//input[@name='s']")
     search_results = (By.CSS_SELECTOR, ".czr-title")
+    button_shop_banner = (By.XPATH, "//div[@class='sektion-wrapper']//a[.='Shop']")
+    second_post_icon = (By.CSS_SELECTOR, ".post-41 > .grid__item")
+    hello_world_icon = (By.CSS_SELECTOR, ".post-39 .bg-link")
+
+class ShopPageLocators(object):
+    button_add_to_cart_bdd = (By.XPATH, "//li[@class='post-29 product type-product status-publish has-post-thumbnail product_cat-courses first instock shipping-taxable purchasable product-type-simple']/a[.='Add to cart']")
+    button_after_adding_to_cart = (By.CSS_SELECTOR, ".added")
 
 class SearchResultsPageLocators(object):
     """A class for search results locators. All search results locators should

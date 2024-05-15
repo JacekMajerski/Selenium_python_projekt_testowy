@@ -1,6 +1,5 @@
 from .elements import BasePageElement
-from .locators import LoginPageLocators
-from .locators import MainPageLocators
+from .locators import *
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
@@ -50,6 +49,18 @@ class MainPage(BasePage):
         set_query.clear()
         set_query.send_keys(search_query)
         set_query.send_keys(Keys.RETURN)
+
+    def click_go_to_shop_from_banner(self):
+        button_shop = self.driver.find_element(*MainPageLocators.button_shop_banner)
+        button_shop.click()
+
+    def click_go_to_second_post(self):
+        go_second_post = self.driver.find_element(*MainPageLocators.second_post_icon)
+        go_second_post.click()
+
+    def click_go_to_hello_world(self):
+        go_to_hello_world = self.driver.find_element(*MainPageLocators.hello_world_icon)
+        go_to_hello_world.click()
 
 class LoginPage(BasePage):  # Dodano dziedziczenie po BasePage
     username_textbox = (By.ID, 'username')
@@ -120,6 +131,11 @@ class LoginPage(BasePage):  # Dodano dziedziczenie po BasePage
     def click_breadcrumbs_to_main_page(self):
         bread_main_page = self.driver.find_element(*LoginPageLocators.breadcrumbs_my_account)
         bread_main_page.click()
+
+class ShopPage(BasePage):  # Dodano dziedziczenie po BasePage
+    def click_add_to_cart_bdd(self):
+        add_to_cart = self.driver.find_element(*ShopPageLocators.button_add_to_cart_bdd)
+        add_to_cart.click()
 
 
 class SearchResultsPage(BasePage):

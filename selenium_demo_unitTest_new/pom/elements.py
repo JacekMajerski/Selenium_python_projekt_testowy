@@ -33,6 +33,11 @@ class MainPageElements(object):
     url_main_page = "http://seleniumdemo.com/"
     url_shop_page = "http://seleniumdemo.com/?post_type=product"
     url_cart_page = "http://seleniumdemo.com/?page_id=5"
+    url_second_post = "http://seleniumdemo.com/?p=41"
+    url_hello_world = "http://seleniumdemo.com/?p=39"
     describe_search = "Search"
     search_java = "java"
     search_result = "Java Selenium WebDriver"
+
+class ShopPageElements(object):
+    name_product_bdd = "BDD Cucumber"

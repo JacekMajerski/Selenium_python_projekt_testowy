@@ -12,7 +12,7 @@ from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
 
 
-class TestLoginPage(unittest.TestCase):
+class TestMainPage(unittest.TestCase):
     """A sample test class to show how page object works"""
 
     def setUp(self):
@@ -80,6 +80,33 @@ class TestLoginPage(unittest.TestCase):
         else:
             print('Wyszukany element jest niezgodny z oczekiwanym')
         self.assertEqual(result, MainPageElements.search_result)
+
+    def test_go_to_shop_from_banner(self):
+        self.main_page.click_go_to_shop_from_banner()
+        print(self.driver.current_url)
+        if (self.driver.current_url == MainPageElements.url_shop_page):
+            print('Adres Url jest zgodny z oczekiwanym')
+        else:
+            print('Adres Url jest niezgodny z oczekiwanym')
+        self.assertEqual(self.driver.current_url, MainPageElements.url_shop_page)
+
+    def test_go_to_second_post(self):
+        self.main_page.click_go_to_second_post()
+        print(self.driver.current_url)
+        if (self.driver.current_url == MainPageElements.url_second_post):
+            print('Adres Url jest zgodny z oczekiwanym')
+        else:
+            print('Adres Url jest niezgodny z oczekiwanym')
+        self.assertEqual(self.driver.current_url, MainPageElements.url_second_post)
+
+    def test_go_to_hello_world(self):
+        self.main_page.click_go_to_hello_world()
+        print(self.driver.current_url)
+        if (self.driver.current_url == MainPageElements.url_hello_world):
+            print('Adres Url jest zgodny z oczekiwanym')
+        else:
+            print('Adres Url jest niezgodny z oczekiwanym')
+        self.assertEqual(self.driver.current_url, MainPageElements.url_hello_world)
 
     def tearDown(self):
         self.driver.quit()
