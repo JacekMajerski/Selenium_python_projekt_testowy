@@ -41,3 +41,4 @@ class MainPageElements(object):
 
 class ShopPageElements(object):
     name_product_bdd = "BDD Cucumber"
+    number_on_basket = "2"

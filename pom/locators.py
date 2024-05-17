@@ -38,6 +38,7 @@ class MainPageLocators(object):
 class ShopPageLocators(object):
     button_add_to_cart_bdd = (By.XPATH, "//li[@class='post-29 product type-product status-publish has-post-thumbnail product_cat-courses first instock shipping-taxable purchasable product-type-simple']/a[.='Add to cart']")
     button_after_adding_to_cart = (By.CSS_SELECTOR, ".added")
+    number_in_icon_basket = (By.CSS_SELECTOR, "[data-toggle='czr-dropdown'] > .count")
 
 class SearchResultsPageLocators(object):
     """A class for search results locators. All search results locators should
