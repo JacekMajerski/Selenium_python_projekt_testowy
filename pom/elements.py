@@ -35,10 +35,14 @@ class MainPageElements(object):
     url_cart_page = "http://seleniumdemo.com/?page_id=5"
     url_second_post = "http://seleniumdemo.com/?p=41"
     url_hello_world = "http://seleniumdemo.com/?p=39"
+    url_order_page = "http://seleniumdemo.com/?page_id=6"
     describe_search = "Search"
     search_java = "java"
     search_result = "Java Selenium WebDriver"
 
 class ShopPageElements(object):
     name_product_bdd = "BDD Cucumber"
-    number_on_basket = "2"
+    number_on_basket = "1"
+
+class CartPageElements(object):
+    empty_cart_describe = "Your cart is currently empty."

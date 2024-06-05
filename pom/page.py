@@ -3,6 +3,8 @@ from .locators import *
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.action_chains import ActionChains
+
 
 
 class SearchTextElement(BasePageElement):
@@ -136,6 +138,25 @@ class ShopPage(BasePage):  # Dodano dziedziczenie po BasePage
     def click_add_to_cart_bdd(self):
         add_to_cart = self.driver.find_element(*ShopPageLocators.button_add_to_cart_bdd)
         add_to_cart.click()
+
+    def hover_the_mouse_over_the_basket(self):
+        hover_basket = self.driver.find_element(*ShopPageLocators.number_in_icon_basket)
+        actions = ActionChains(self.driver)
+        actions.move_to_element(hover_basket).perform()
+
+    def go_to_cart_page(self):
+        go_to_cart = self.driver.find_element(*ShopPageLocators.button_view_cart)
+        go_to_cart.click()
+
+    def go_to_order_page(self):
+        go_to_cart = self.driver.find_element(*ShopPageLocators.button_checkout)
+        go_to_cart.click()
+
+class CartPage(BasePage):
+
+    def go_to_shop(self):
+        go_to_shop = self.driver.find_element(*CartPageLocators.button_return_to_shop)
+        go_to_shop.click()
 
 
 class SearchResultsPage(BasePage):

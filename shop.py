@@ -49,17 +49,70 @@ class TestShopPage(unittest.TestCase):
         except AssertionError:
             self.fail( '- element is not expected')
 
-    def test_add_to_basket_verify_number_on_basket(self):
+    def test_verify_product_in_view_shopping_cart(self):
         self.shop_page.click_add_to_cart_bdd()
-        number_basket_element = WebDriverWait(self.driver, timeout=10).until(
-        EC.visibility_of_element_located(ShopPageLocators.number_in_icon_basket))
-        number_basket = number_basket_element.text
-        if (number_basket == ShopPageElements.number_on_basket):
+        product_name = self.driver.find_element(*ShopPageLocators.product_name_in_shop).text
+        product_price = self.driver.find_element(*ShopPageLocators.product_price_in_shop).text
+        self.shop_page.hover_the_mouse_over_the_basket()
+        product_name_in_mini_basket = self.driver.find_element(*ShopPageLocators.product_name_in_mini_basket).text
+        product_price_in_mini_basket = self.driver.find_element(*ShopPageLocators.product_price_in_mini_basket).text
+        self.assertEqual(product_name, product_name_in_mini_basket, "nazwa produktu sie nie zgadza")
+        self.assertEqual(product_price, product_price_in_mini_basket, "cena produktu sie nie zgadza")
+
+    def test_verify_product_icon_in_view_shopping_cart(self):
+        self.shop_page.click_add_to_cart_bdd()
+        self.shop_page.hover_the_mouse_over_the_basket()
+        icon_mini_basket = self.driver.find_element(*ShopPageLocators.icon_on_mini_basket)
+        is_visible = icon_mini_basket.is_displayed()
+        if is_visible:
+            print("Element jest widoczny na stronie.")
+        else:
+            print("Element nie jest widoczny na stronie.")
+
+    def test_verify_of_button_checkout_visibility_in_view_shopping_cart(self):
+        self.shop_page.click_add_to_cart_bdd()
+        self.shop_page.hover_the_mouse_over_the_basket()
+        button_checkout = self.driver.find_element(*ShopPageLocators.button_checkout)
+        is_visible = button_checkout.is_displayed()
+        if is_visible:
+            print("Element jest widoczny na stronie.")
+        else:
+            print("Element nie jest widoczny na stronie.")
+
+    def test_verify_of_button_view_cart_visibility_in_view_shopping_cart(self):
+        self.shop_page.click_add_to_cart_bdd()
+        self.shop_page.hover_the_mouse_over_the_basket()
+        button_view_cart = self.driver.find_element(*ShopPageLocators.button_view_cart)
+        is_visible = button_view_cart.is_displayed()
+        if is_visible:
+            print("Element jest widoczny na stronie.")
+        else:
+            print("Element nie jest widoczny na stronie.")
+
+    def test_go_to_cart_page(self):
+        self.shop_page.click_add_to_cart_bdd()
+        self.shop_page.hover_the_mouse_over_the_basket()
+        self.shop_page.go_to_cart_page()
+        print(self.driver.current_url)
+        if (self.driver.current_url == MainPageElements.url_cart_page):
             print('Adres Url jest zgodny z oczekiwanym')
         else:
             print('Adres Url jest niezgodny z oczekiwanym')
-        self.assertEqual(self.driver.current_url, MainPageElements.url_main_page)
-        
+        self.assertEqual(self.driver.current_url, MainPageElements.url_cart_page)
+
+    def test_go_to_order_page(self):
+        self.shop_page.click_add_to_cart_bdd()
+        self.shop_page.hover_the_mouse_over_the_basket()
+        self.shop_page.go_to_order_page()
+        print(self.driver.current_url)
+        if (self.driver.current_url == MainPageElements.url_order_page):
+            print('Adres Url jest zgodny z oczekiwanym')
+        else:
+            print('Adres Url jest niezgodny z oczekiwanym')
+        self.assertEqual(self.driver.current_url, MainPageElements.url_order_page)
+
+
+
     def tearDown(self):
         self.driver.quit()
 

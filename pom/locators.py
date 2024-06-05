@@ -39,6 +39,17 @@ class ShopPageLocators(object):
     button_add_to_cart_bdd = (By.XPATH, "//li[@class='post-29 product type-product status-publish has-post-thumbnail product_cat-courses first instock shipping-taxable purchasable product-type-simple']/a[.='Add to cart']")
     button_after_adding_to_cart = (By.CSS_SELECTOR, ".added")
     number_in_icon_basket = (By.CSS_SELECTOR, "[data-toggle='czr-dropdown'] > .count")
+    product_name_in_shop = (By.CSS_SELECTOR, ".woocommerce-loop-product__title")
+    product_price_in_shop = (By.CSS_SELECTOR, ".post-29 .woocommerce-Price-amount")
+    product_name_in_mini_basket = (By.CSS_SELECTOR, ".woocommerce-mini-cart-item > a:nth-of-type(2)")
+    product_price_in_mini_basket = (By.CSS_SELECTOR, ".woocommerce-mini-cart__total > .woocommerce-Price-amount")
+    icon_on_mini_basket = (By.CSS_SELECTOR, ".mCS_img_loaded")
+    button_view_cart = (By.XPATH, "//a[.='View cart']")
+    button_checkout = (By.XPATH, "//a[.='Checkout']")
+
+class CartPageLocators(object):
+    cart_describe = (By.CSS_SELECTOR, ".cart-empty")
+    button_return_to_shop = (By.XPATH, "//a[contains(.,'Return to shop')]")
 
 class SearchResultsPageLocators(object):
     """A class for search results locators. All search results locators should
