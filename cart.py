@@ -38,6 +38,23 @@ class TestCartPage(unittest.TestCase):
             print('Adres Url jest niezgodny z oczekiwanym')
         self.assertEqual(self.driver.current_url, MainPageElements.url_shop_page)
 
+    def test_notyfication_adding_bad_coupon(self):
+        self.driver.get("http://seleniumdemo.com")
+        self.cart_page.set_cookies_product()
+        self.driver.get("http://seleniumdemo.com/?page_id=6")
+        self.cart_page.click_to_enter_coupon()
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(CartPageLocators.fill_code))
+        self.cart_page.fill_bad_code()
+        self.cart_page.click_apply_coupon()
+        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(CartPageLocators.notify_bad_coupon))
+        notify = self.driver.find_element(*CartPageLocators.notify_bad_coupon).text
+        print(notify)
+        if (notify == CartPageElements.notify_bad_code):
+            print('Notyfikacja jest zgodna z oczekiwaną')
+        else:
+            print('Notyfikacja jest niezgodna z oczekiwaną')
+        self.assertEqual(notify, CartPageElements.notify_bad_code)
+
     def tearDown(self):
         self.driver.quit()
 

@@ -50,6 +50,10 @@ class ShopPageLocators(object):
 class CartPageLocators(object):
     cart_describe = (By.CSS_SELECTOR, ".cart-empty")
     button_return_to_shop = (By.XPATH, "//a[contains(.,'Return to shop')]")
+    enter_code = (By.XPATH, "//a[.='Click here to enter your code']")
+    fill_code = (By.XPATH, "//input[@id='coupon_code']")
+    button_apply_coupon = (By.XPATH, "//button[@name='apply_coupon']")
+    notify_bad_coupon = (By.CSS_SELECTOR, ".woocommerce-error")
 
 class SearchResultsPageLocators(object):
     """A class for search results locators. All search results locators should

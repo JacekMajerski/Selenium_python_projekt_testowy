@@ -46,3 +46,5 @@ class ShopPageElements(object):
 
 class CartPageElements(object):
     empty_cart_describe = "Your cart is currently empty."
+    bad_code = '1234'
+    notify_bad_code = 'Coupon "' + bad_code + '" does not exist!'

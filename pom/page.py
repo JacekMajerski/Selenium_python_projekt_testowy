@@ -1,4 +1,8 @@
-from .elements import BasePageElement
+from telnetlib import EC
+
+from selenium.webdriver.support.wait import WebDriverWait
+
+from .elements import *
 from .locators import *
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
@@ -158,6 +162,37 @@ class CartPage(BasePage):
         go_to_shop = self.driver.find_element(*CartPageLocators.button_return_to_shop)
         go_to_shop.click()
 
+    def set_cookies_product(self):
+        self.driver.get("http://seleniumdemo.com/")
+        cookie_hash = {
+            'name': 'woocommerce_cart_hash',
+            'value': '5c2c0a8be83a1306d87c17469a3dfffd',
+        }
+        cookie_item = {
+            'name': 'woocommerce_items_in_cart',
+            'value': '1',
+        }
+        cookie_session = {
+            'name': 'wp_woocommerce_session_7c35fe1dca10889b305dae662226b0f6',
+            'value': 'cdbc36ba43cdc3c16bb40f576c2fdd39%7C%7C1717836126%7C%7C1717832526%7C%7Cd7f3801ea5ed6e1cba504284a2abec3c',
+        }
+        self.driver.add_cookie(cookie_hash)
+        self.driver.add_cookie(cookie_item)
+        self.driver.add_cookie(cookie_session)
+
+
+    def click_to_enter_coupon(self):
+        enter_coupon = self.driver.find_element(*CartPageLocators.enter_code)
+        enter_coupon.click()
+
+    def fill_bad_code(self):
+        fill_code = self.driver.find_element(*CartPageLocators.fill_code)
+        fill_code.clear()
+        fill_code.send_keys(CartPageElements.bad_code)
+
+    def click_apply_coupon(self):
+        apply_coupon = self.driver.find_element(*CartPageLocators.button_apply_coupon)
+        apply_coupon.click()
 
 class SearchResultsPage(BasePage):
     """Search results page action methods come here"""
