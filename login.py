@@ -5,7 +5,7 @@ from selenium.webdriver.common.by import By
 from pom.page import LoginPage, MainPage
 from pom.elements import LoginPageElements, MainPageElements
 from pom.locators import LoginPageLocators, MainPageLocators
-from pom.actions import LoginPageActions
+from pom.actions import *
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException, NoSuchElementException

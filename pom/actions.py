@@ -1,8 +1,6 @@
-from .elements import LoginPageElements
-from .elements import MainPageElements
-from .locators import LoginPageLocators
-from .locators import MainPageLocators
-from .page import BasePage
+from .elements import *
+from .locators import *
+from .page import *
 
 
 class LoginPageActions(BasePage):
@@ -26,6 +24,16 @@ class LoginPageActions(BasePage):
         self.user = user_email[:-15] #usuniecie domeny z maila
         name = self.driver.find_element(*LoginPageLocators.name_in_my_account).text #pobranie nazwy użytkownika po zarejestrowaniu
         self.name = name
+
+class CartPageActions(BasePage):
+    def __init__(self, driver, cart_page):
+        super().__init__(driver)
+        self.cart_page = cart_page
+
+    def set_product_in_basket_and_go_to_order(self):
+        self.driver.get("http://seleniumdemo.com")
+        self.cart_page.set_cookies_product()
+        self.driver.get("http://seleniumdemo.com/?page_id=6")
 
 
 

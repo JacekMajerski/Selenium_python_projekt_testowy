@@ -24,7 +24,7 @@ class BasePageElement(object):
         return element.get_attribute("value")
 
 class LoginPageElements(object):
-    user_email = 'jmajerski09@dkj.m4u.pl'
+    user_email = 'jmajerskiqa@gmail.com'
     user_password_pass ="Listopad2022"
     user_password_fail ="Listopad"
     notify_incorrect_login = "ERROR: Too many failed login attempts. Please try again"
@@ -40,6 +40,7 @@ class MainPageElements(object):
     search_java = "java"
     search_result = "Java Selenium WebDriver"
 
+
 class ShopPageElements(object):
     name_product_bdd = "BDD Cucumber"
     number_on_basket = "1"
@@ -48,3 +49,13 @@ class CartPageElements(object):
     empty_cart_describe = "Your cart is currently empty."
     bad_code = '1234'
     notify_bad_code = 'Coupon "' + bad_code + '" does not exist!'
+    name = 'Janusz'
+    last_name = 'Testingu'
+    company = 'Firma Krzak'
+    address = 'ulica Testowa'
+    address_apartment = '44'
+    postcode = '85-500'
+    city = 'Bydgoszcz'
+    phone = '500600700'
+    first_name_error = "Billing First name  is a required field."
+

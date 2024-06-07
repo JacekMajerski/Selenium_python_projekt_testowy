@@ -54,6 +54,19 @@ class CartPageLocators(object):
     fill_code = (By.XPATH, "//input[@id='coupon_code']")
     button_apply_coupon = (By.XPATH, "//button[@name='apply_coupon']")
     notify_bad_coupon = (By.CSS_SELECTOR, ".woocommerce-error")
+    first_name = (By.CSS_SELECTOR, "#billing_first_name")
+    last_name = (By.CSS_SELECTOR, "#billing_last_name")
+    company_name = (By.CSS_SELECTOR, "#billing_company")
+    street_address = (By.ID, "billing_address_1")
+    street_address_optional = (By.ID, "billing_address_2")
+    postcode = (By.CSS_SELECTOR, "#billing_postcode")
+    city = (By.ID, "billing_city")
+    phone = (By.ID, "billing_phone")
+    email_address = (By.ID, "billing_email")
+    button_place_order = (By.ID, "place_order")
+    first_name_error = (By.XPATH, "//li[contains(.,'Billing First name is a required field.')]")
+
+
 
 class SearchResultsPageLocators(object):
     """A class for search results locators. All search results locators should

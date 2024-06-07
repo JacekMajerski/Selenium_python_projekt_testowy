@@ -194,6 +194,55 @@ class CartPage(BasePage):
         apply_coupon = self.driver.find_element(*CartPageLocators.button_apply_coupon)
         apply_coupon.click()
 
+    def fill_first_name(self):
+        first_name = self.driver.find_element(*CartPageLocators.first_name)
+        first_name.clear()
+        first_name.send_keys(CartPageElements.name)
+
+    def fill_last_name(self):
+        first_name = self.driver.find_element(*CartPageLocators.last_name)
+        first_name.clear()
+        first_name.send_keys(CartPageElements.last_name)
+
+    def fill_company_name(self):
+        first_name = self.driver.find_element(*CartPageLocators.company_name)
+        first_name.clear()
+        first_name.send_keys(CartPageElements.company)
+
+    def fill_street_name(self):
+        first_name = self.driver.find_element(*CartPageLocators.street_address)
+        first_name.clear()
+        first_name.send_keys(CartPageElements.address)
+
+    def fill_street_optional_name(self):
+        first_name = self.driver.find_element(*CartPageLocators.street_address_optional)
+        first_name.clear()
+        first_name.send_keys(CartPageElements.address_apartment)
+
+    def fill_postcode(self):
+        first_name = self.driver.find_element(*CartPageLocators.postcode)
+        first_name.clear()
+        first_name.send_keys(CartPageElements.postcode)
+
+    def fill_city(self):
+        first_name = self.driver.find_element(*CartPageLocators.city)
+        first_name.clear()
+        first_name.send_keys(CartPageElements.city)
+
+    def fill_phone(self):
+        first_name = self.driver.find_element(*CartPageLocators.phone)
+        first_name.clear()
+        first_name.send_keys(CartPageElements.phone)
+
+    def fill_email(self):
+        first_name = self.driver.find_element(*CartPageLocators.email_address)
+        first_name.clear()
+        first_name.send_keys(LoginPageElements.user_email)
+
+    def click_button_place_order(self):
+        button = self.driver.find_element(*CartPageLocators.button_place_order)
+        button.click()
+
 class SearchResultsPage(BasePage):
     """Search results page action methods come here"""
     def is_results_found(self):
