@@ -1,6 +1,6 @@
 from telnetlib import EC
 
-from selenium.webdriver.support.wait import WebDriverWait
+
 
 from .elements import *
 from .locators import *
@@ -8,7 +8,8 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
-
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.wait import WebDriverWait
 
 
 class SearchTextElement(BasePageElement):
@@ -157,7 +158,18 @@ class ShopPage(BasePage):  # Dodano dziedziczenie po BasePage
         go_to_cart.click()
 
 class CartPage(BasePage):
-
+    def fill_input(self, locator, value):
+        try:
+            element = WebDriverWait(self.driver, 10).until(
+                EC.visibility_of_element_located(locator)
+            )
+            WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable(locator)
+            )
+            element.clear()
+            element.send_keys(value)
+        except Exception as e:
+            print(f"Error interacting with element {locator}: {e}")
     def go_to_shop(self):
         go_to_shop = self.driver.find_element(*CartPageLocators.button_return_to_shop)
         go_to_shop.click()
@@ -174,7 +186,7 @@ class CartPage(BasePage):
         }
         cookie_session = {
             'name': 'wp_woocommerce_session_7c35fe1dca10889b305dae662226b0f6',
-            'value': 'cdbc36ba43cdc3c16bb40f576c2fdd39%7C%7C1717836126%7C%7C1717832526%7C%7Cd7f3801ea5ed6e1cba504284a2abec3c',
+            'value': '0ddb9de40906abea730d05d5703e4cdd%7C%7C1718013685%7C%7C1718010085%7C%7C49bd7d7e9723a7c39a3a8eeb621ffad4',
         }
         self.driver.add_cookie(cookie_hash)
         self.driver.add_cookie(cookie_item)
@@ -194,54 +206,42 @@ class CartPage(BasePage):
         apply_coupon = self.driver.find_element(*CartPageLocators.button_apply_coupon)
         apply_coupon.click()
 
+
+
+
     def fill_first_name(self):
-        first_name = self.driver.find_element(*CartPageLocators.first_name)
-        first_name.clear()
-        first_name.send_keys(CartPageElements.name)
+            self.fill_input(CartPageLocators.first_name, CartPageElements.name)
 
     def fill_last_name(self):
-        first_name = self.driver.find_element(*CartPageLocators.last_name)
-        first_name.clear()
-        first_name.send_keys(CartPageElements.last_name)
+            self.fill_input(CartPageLocators.last_name, CartPageElements.last_name)
 
     def fill_company_name(self):
-        first_name = self.driver.find_element(*CartPageLocators.company_name)
-        first_name.clear()
-        first_name.send_keys(CartPageElements.company)
+            self.fill_input(CartPageLocators.company_name, CartPageElements.company)
 
     def fill_street_name(self):
-        first_name = self.driver.find_element(*CartPageLocators.street_address)
-        first_name.clear()
-        first_name.send_keys(CartPageElements.address)
+            self.fill_input(CartPageLocators.street_address, CartPageElements.address)
 
     def fill_street_optional_name(self):
-        first_name = self.driver.find_element(*CartPageLocators.street_address_optional)
-        first_name.clear()
-        first_name.send_keys(CartPageElements.address_apartment)
+            self.fill_input(CartPageLocators.street_address_optional, CartPageElements.address_apartment)
 
     def fill_postcode(self):
-        first_name = self.driver.find_element(*CartPageLocators.postcode)
-        first_name.clear()
-        first_name.send_keys(CartPageElements.postcode)
+            self.fill_input(CartPageLocators.postcode, CartPageElements.postcode)
 
     def fill_city(self):
-        first_name = self.driver.find_element(*CartPageLocators.city)
-        first_name.clear()
-        first_name.send_keys(CartPageElements.city)
+            self.fill_input(CartPageLocators.city, CartPageElements.city)
 
     def fill_phone(self):
-        first_name = self.driver.find_element(*CartPageLocators.phone)
-        first_name.clear()
-        first_name.send_keys(CartPageElements.phone)
+            self.fill_input(CartPageLocators.phone, CartPageElements.phone)
 
     def fill_email(self):
-        first_name = self.driver.find_element(*CartPageLocators.email_address)
-        first_name.clear()
-        first_name.send_keys(LoginPageElements.user_email)
+            self.fill_input(CartPageLocators.email_address, LoginPageElements.user_email)
 
     def click_button_place_order(self):
-        button = self.driver.find_element(*CartPageLocators.button_place_order)
-        button.click()
+            element = WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable(CartPageLocators.button_place_order)
+            )
+            element.click()
+
 
 class SearchResultsPage(BasePage):
     """Search results page action methods come here"""

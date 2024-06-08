@@ -57,5 +57,5 @@ class CartPageElements(object):
     postcode = '85-500'
     city = 'Bydgoszcz'
     phone = '500600700'
-    first_name_error = "Billing First name  is a required field."
+    first_name_error = "Billing First name is a required field."
 

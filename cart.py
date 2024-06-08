@@ -24,8 +24,8 @@ class TestCartPage(unittest.TestCase):
         self.driver.set_window_size(1920, 1080)
         self.driver.get("http://seleniumdemo.com/?page_id=5")
         self.cart_page = CartPage(self.driver)
-
-
+        self.shop_page = ShopPage(self.driver)
+        self.main_page = MainPage(self.driver)
     def test_verify_describe_of_empty_cart(self):
         describe_empty_cart = self.driver.find_element(*CartPageLocators.cart_describe).text
         self.assertEqual(describe_empty_cart, CartPageElements.empty_cart_describe, "Elementy nie sa zgodne")
@@ -167,15 +167,45 @@ class TestCartPage(unittest.TestCase):
     def test_notify_entry(self):
         actions = CartPageActions(self.driver, self.cart_page)
         actions.set_product_in_basket_and_go_to_order()
-        self.cart_page.click_button_place_order()
-        WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(CartPageLocators.first_name_error))
-        error = self.driver.find_element(*CartPageLocators.first_name_error).get_attribute('value')
+
+        # Próba kliknięcia przycisku "place order" z obsługą wyjątku StaleElementReferenceException
+        try:
+            place_order_button = WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable(CartPageLocators.button_place_order))
+            place_order_button.click()
+        except selenium.common.exceptions.StaleElementReferenceException:
+            place_order_button = WebDriverWait(self.driver, 10).until(
+                EC.element_to_be_clickable(CartPageLocators.button_place_order))
+            place_order_button.click()
+
+        # Oczekiwanie na pojawienie się błędu pierwszego imienia
+        WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(CartPageLocators.first_name_error))
+
+        # Pobranie tekstu błędu z elementu
+        error_element = self.driver.find_element(*CartPageLocators.first_name_error)
+        error = error_element.text
         print(error)
-        if (error == CartPageElements.first_name_error):
-            print('Wpisana wartosc jest zgodna z oczekiwana')
+
+        if error == CartPageElements.first_name_error:
+            print('Wpisana wartość jest zgodna z oczekiwaną')
         else:
             print('Wpisana wartość jest niezgodna z oczekiwaną')
+
         self.assertEqual(error, CartPageElements.first_name_error)
+
+    def test_order_summary_verification(self):
+        self.driver.delete_all_cookies()
+        self.driver.get('http://seleniumdemo.com/')
+        self.main_page.click_go_to_shop()
+        self.shop_page.click_add_to_cart_bdd()
+        self.shop_page.hover_the_mouse_over_the_basket()
+        self.shop_page.go_to_order_page()
+
+        self.driver.get("http://seleniumdemo.com/?page_id=6")
+
+        actions = CartPageActions(self.driver, self.cart_page)
+        actions.fill_in_the_blanks_on_order()
+
 
     def tearDown(self):
         self.driver.quit()
