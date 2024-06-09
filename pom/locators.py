@@ -65,6 +65,13 @@ class CartPageLocators(object):
     email_address = (By.ID, "billing_email")
     button_place_order = (By.ID, "place_order")
     first_name_error = (By.XPATH, "//li[contains(.,'Billing First name is a required field.')]")
+class OrdersPageLocators(object):
+    order_notice = (By.CSS_SELECTOR, ".woocommerce-notice")
+    product_link = (By.XPATH, "//a[.='BDD Cucumber']")
+    order_number = (By.CSS_SELECTOR, '.order > strong')
+    order_date = (By.CSS_SELECTOR, '.date > strong')
+    order_price = (By.CSS_SELECTOR, '.total .woocommerce-Price-amount')
+    order_payment_method = (By.CSS_SELECTOR, '.method > strong')
 
 
 

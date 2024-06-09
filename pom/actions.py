@@ -10,6 +10,9 @@ class LoginPageActions(BasePage):
         self.name = None
         self.user = None
         self.user_email = None
+        self.cart_page = CartPage(self.driver)
+        self.shop_page = ShopPage(self.driver)
+        self.main_page = MainPage(self.driver)
 
     def register(self):
         self.driver.get("https://ethereal.email/")
@@ -29,6 +32,9 @@ class CartPageActions(BasePage):
     def __init__(self, driver, cart_page):
         super().__init__(driver)
         self.cart_page = cart_page
+        self.cart_page = CartPage(self.driver)
+        self.shop_page = ShopPage(self.driver)
+        self.main_page = MainPage(self.driver)
 
 
     def set_product_in_basket_and_go_to_order(self):
@@ -54,5 +60,13 @@ class CartPageActions(BasePage):
         time.sleep(1)
         self.cart_page.fill_email()
         time.sleep(1)
-        self.cart_page.click_button_place_order()
+
+    def add_product_to_cart(self):
+        self.driver.delete_all_cookies()
+        self.driver.get('http://seleniumdemo.com/')
+        self.main_page.click_go_to_shop()
+        self.shop_page.click_add_to_cart_bdd()
+        self.shop_page.hover_the_mouse_over_the_basket()
+        self.shop_page.go_to_order_page()
+        self.driver.get("http://seleniumdemo.com/?page_id=6")
 

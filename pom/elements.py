@@ -36,6 +36,7 @@ class MainPageElements(object):
     url_second_post = "http://seleniumdemo.com/?p=41"
     url_hello_world = "http://seleniumdemo.com/?p=39"
     url_order_page = "http://seleniumdemo.com/?page_id=6"
+    url_bdd_cucumber = 'http://seleniumdemo.com/?product=bdd-cucumber'
     describe_search = "Search"
     search_java = "java"
     search_result = "Java Selenium WebDriver"
@@ -58,4 +59,6 @@ class CartPageElements(object):
     city = 'Bydgoszcz'
     phone = '500600700'
     first_name_error = "Billing First name is a required field."
+class OrdersPageElements(object):
+    order_notice = 'Thank you. Your order has been received.'
 

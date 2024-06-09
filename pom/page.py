@@ -1,3 +1,4 @@
+import time
 from telnetlib import EC
 
 
@@ -207,8 +208,6 @@ class CartPage(BasePage):
         apply_coupon.click()
 
 
-
-
     def fill_first_name(self):
             self.fill_input(CartPageLocators.first_name, CartPageElements.name)
 
@@ -240,8 +239,15 @@ class CartPage(BasePage):
             element = WebDriverWait(self.driver, 10).until(
                 EC.element_to_be_clickable(CartPageLocators.button_place_order)
             )
+            time.sleep(2)
+            (
+                EC.visibility_of_element_located(CartPageLocators.button_place_order)
+            )
             element.click()
-
+class OrdersPage(BasePage):
+    def click_product(self):
+        product = self.driver.find_element(*OrdersPageLocators.product_link)
+        product.click()
 
 class SearchResultsPage(BasePage):
     """Search results page action methods come here"""

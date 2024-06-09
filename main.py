@@ -29,18 +29,18 @@ class TestMainPage(unittest.TestCase):
         self.main_page.click_go_to_shop()
         print(self.driver.current_url)
         if (self.driver.current_url == MainPageElements.url_shop_page):
-            print('Adres Url jest zgodny z oczekiwanym')
+            print('Url address is as expected')
         else:
-            print('Adres Url jest niezgodny z oczekiwanym')
+            print('Url address is not as expected')
         self.assertEqual(self.driver.current_url, MainPageElements.url_shop_page)
 
     def test_go_to_cart_main_menu(self):
         self.main_page.click_go_to_cart_main_menu()
         print(self.driver.current_url)
         if (self.driver.current_url == MainPageElements.url_cart_page):
-            print('Adres Url jest zgodny z oczekiwanym')
+            print('Url address is as expected')
         else:
-            print('Adres Url jest niezgodny z oczekiwanym')
+            print('Url address is not as expected')
         self.assertEqual(self.driver.current_url, MainPageElements.url_cart_page)
 
     def test_go_to_cart_icon(self):
@@ -51,9 +51,9 @@ class TestMainPage(unittest.TestCase):
         self.main_page.click_go_to_cart_icon()
         print(self.driver.current_url)
         if (self.driver.current_url == MainPageElements.url_cart_page):
-            print('Adres Url jest zgodny z oczekiwanym')
+            print('Url address is as expected')
         else:
-            print('Adres Url jest niezgodny z oczekiwanym')
+            print('Url address is not as expected')
         self.assertEqual(self.driver.current_url, MainPageElements.url_cart_page)
 
     def test_search_engine(self):
@@ -62,9 +62,9 @@ class TestMainPage(unittest.TestCase):
         inscription = self.driver.find_element(*MainPageLocators.search_describe).text
         print(inscription)
         if (inscription == MainPageElements.describe_search):
-            print('Napis na wyszukiwarce jest zgodny z oczekiwanym')
+            print('The search engine caption is as expected')
         else:
-            print('Napis na wyszukiwarce jest niezgodny z oczekiwanym, lub strona wczytała się niepoprawnie')
+            print('The search engine caption is not as expected, or the page loads incorrectly')
         self.assertEqual(inscription, MainPageElements.describe_search)
 
     def test_search_engine_search_java(self):
@@ -76,36 +76,36 @@ class TestMainPage(unittest.TestCase):
         result = self.driver.find_element(*MainPageLocators.search_results).text
         print(result)
         if (result == MainPageElements.search_result):
-            print('Wyszukany element jest zgodny z oczekiwanym')
+            print('The item searching is as expected')
         else:
-            print('Wyszukany element jest niezgodny z oczekiwanym')
+            print('The item searching is not as expected')
         self.assertEqual(result, MainPageElements.search_result)
 
     def test_go_to_shop_from_banner(self):
         self.main_page.click_go_to_shop_from_banner()
         print(self.driver.current_url)
         if (self.driver.current_url == MainPageElements.url_shop_page):
-            print('Adres Url jest zgodny z oczekiwanym')
+            print('Url address is as expected')
         else:
-            print('Adres Url jest niezgodny z oczekiwanym')
+            print('Url address is not as expected')
         self.assertEqual(self.driver.current_url, MainPageElements.url_shop_page)
 
     def test_go_to_second_post(self):
         self.main_page.click_go_to_second_post()
         print(self.driver.current_url)
         if (self.driver.current_url == MainPageElements.url_second_post):
-            print('Adres Url jest zgodny z oczekiwanym')
+            print('Url address is as expected')
         else:
-            print('Adres Url jest niezgodny z oczekiwanym')
+            print('Url address is not as expected')
         self.assertEqual(self.driver.current_url, MainPageElements.url_second_post)
 
     def test_go_to_hello_world(self):
         self.main_page.click_go_to_hello_world()
         print(self.driver.current_url)
         if (self.driver.current_url == MainPageElements.url_hello_world):
-            print('Adres Url jest zgodny z oczekiwanym')
+            print('Url address is as expected')
         else:
-            print('Adres Url jest niezgodny z oczekiwanym')
+            print('Url address is not as expected')
         self.assertEqual(self.driver.current_url, MainPageElements.url_hello_world)
 
     def tearDown(self):
