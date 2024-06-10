@@ -36,7 +36,6 @@ class CartPageActions(BasePage):
         self.shop_page = ShopPage(self.driver)
         self.main_page = MainPage(self.driver)
 
-
     def set_product_in_basket_and_go_to_order(self):
         self.driver.get("http://seleniumdemo.com")
         self.cart_page.set_cookies_product()
@@ -62,6 +61,7 @@ class CartPageActions(BasePage):
         time.sleep(1)
 
     def add_product_to_cart(self):
+        self.driver.get('http://seleniumdemo.com/')
         self.driver.delete_all_cookies()
         self.driver.get('http://seleniumdemo.com/')
         self.main_page.click_go_to_shop()

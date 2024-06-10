@@ -28,8 +28,10 @@ class MainPage(BasePage):
     search_text_element = SearchTextElement()
 
     def click_go_to_shop(self):
-        go_shop = self.driver.find_element(*MainPageLocators.go_to_shop)
-        go_shop.click()
+        element = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(MainPageLocators.go_to_shop)
+        )
+        element.click()
 
 
     def click_go_to_cart_main_menu(self):
@@ -142,11 +144,15 @@ class LoginPage(BasePage):  # Dodano dziedziczenie po BasePage
 
 class ShopPage(BasePage):  # Dodano dziedziczenie po BasePage
     def click_add_to_cart_bdd(self):
-        add_to_cart = self.driver.find_element(*ShopPageLocators.button_add_to_cart_bdd)
-        add_to_cart.click()
+        element = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(ShopPageLocators.button_add_to_cart_bdd)
+        )
+        element.click()
 
     def hover_the_mouse_over_the_basket(self):
-        hover_basket = self.driver.find_element(*ShopPageLocators.number_in_icon_basket)
+        hover_basket = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(ShopPageLocators.number_in_icon_basket)
+        )
         actions = ActionChains(self.driver)
         actions.move_to_element(hover_basket).perform()
 
@@ -155,8 +161,10 @@ class ShopPage(BasePage):  # Dodano dziedziczenie po BasePage
         go_to_cart.click()
 
     def go_to_order_page(self):
-        go_to_cart = self.driver.find_element(*ShopPageLocators.button_checkout)
-        go_to_cart.click()
+        element = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located(ShopPageLocators.button_checkout)
+        )
+        element.click()
 
 class CartPage(BasePage):
     def fill_input(self, locator, value):

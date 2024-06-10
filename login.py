@@ -28,7 +28,7 @@ class TestLoginPage(unittest.TestCase):
         self.login_page.set_password(LoginPageElements.user_password_pass)
         self.login_page.click_login_button()
         name = self.driver.find_element(*LoginPageLocators.name_in_my_account).text
-        user = LoginPageElements.user_email[:-11]
+        user = LoginPageElements.user_email[:-10]
         self.assertIn(name, user)
 
     def test_register_success(self):
